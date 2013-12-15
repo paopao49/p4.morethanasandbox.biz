@@ -1,11 +1,13 @@
-<p>
-	Hello World! You have successfully spawned a new application.
-</p>
+<?php if($error == 'error'): ?>
 
-<p>
-	This message is being triggered via the c_index.php controller, within the index() method.
-</p>
+	<p>Log in or sign up to access EZFest!</p>
 
-<p>
-	<strong>Since everything is in working order, you should now delete <?php echo APP_PATH?>diagnostics.php</strong>
-</p>
+<?php endif; ?>
+
+<h2>Welcome to EZFest!</h2>
+
+<p>Sign in to search for music festivals and plan with friends!</p>
+
+<p><a href='/reg/login'>Sign In</a></p>
+
+<p><a href='/reg/join'>Join</a></p>

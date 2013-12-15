@@ -12,6 +12,21 @@
 
 <body>	
 
+	<!-- Header navigation -->
+	<ul>
+
+		<?php if($user): ?>
+			<li><a href='/festivals/index'>EZFest</a></li>
+			<li><a href=''>Friends</a></li>
+			<li><a href=''>My Festivals</a></li>
+			<li><a href='/reg/logout'>Log Out</a></li>
+		<?php else: ?>
+			<li><a href='/'>EZFest</a></li>
+			<li><a href='/reg/login'>Sign In</a></li>
+			<li><a href='/reg/join'>Join</a></li>
+		<?php endif; ?>
+	</ul>
+
 	<?php if(isset($content)) echo $content; ?>
 
 	<?php if(isset($client_files_body)) echo $client_files_body; ?>
