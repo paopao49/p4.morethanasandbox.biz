@@ -11,7 +11,7 @@ Features:
 	4. Visit festival description page
 	5. See who else is using the app
 	6. See what festivals everyone else is interested in (flagged festival as wishlist or confirmed)
-	7. Add festivals to your own wishlist of confirm attendance
+	7. Add festivals to your own wishlist of confirm attendance (AJAX implementation)
 	8. Plan itinerary for each festival
 
-JavaScript is utilized for form validation.
+JavaScript is utilized for AJAX implementations, as well as form validation.
