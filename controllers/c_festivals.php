@@ -11,22 +11,114 @@ class festivals_controller extends base_controller {
 			Router::redirect('/index/index/error');
 		}
 
-	}
+	} # End of method
 
-	public function index() {
+	public function index($user_id = NULL) {
 
+        $client_files_body = Array(
+            'https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
+            '/js/js_festivals_index.js'
+        );
+
+        $this->template->client_files_body = Utils::load_client_files($client_files_body); 	
+
+		$current_user_id = $this->user->user_id;
 		$this->template->content = View::instance('v_festivals_index');
-		$this->template->title = 'Festival List';
 
-		$q = 'select * from festivals';
+		# Festival index with no user_id selected (aka the home page)
+		if(!$user_id) {
 
-		$festival_list = DB::instance(DB_NAME)->select_rows($q);
+			$q_home = '
+				select 
+					a.*,
+					b.rsvp_id,
+					b.user_id,
+					b.status
+				from festivals a
+				left join rsvp b
+					on (
+					a.festival_id = b.festival_id
+					and b.user_id = '.$current_user_id.'
+					)
+			';
 
-		$this->template->content->festival_list = $festival_list;
+			$festival_list = DB::instance(DB_NAME)->select_rows($q_home);
 
-		echo $this->template;
+			$this->template->content->festival_list = $festival_list;
 
-	}
+			$this->template->title = 'Festivals!';
+
+			$this->template->content->index_type = 'home';
+
+			echo $this->template;
+
+		} # End of if
+
+		# Festival index with self selected
+		if($user_id == $current_user_id) {
+
+			$q_self = '
+				select 
+					a.*,
+					b.rsvp_id,
+					b.user_id,
+					b.status				
+				from festivals a
+				inner join rsvp b
+					on (
+					a.festival_id = b.festival_id
+					and b.user_id = '.$current_user_id.'
+					)
+			';
+
+			$festival_list = DB::instance(DB_NAME)->select_rows($q_self);
+
+			$this->template->content->festival_list = $festival_list;
+
+			$this->template->title = 'My Festivals';
+
+			$this->template->content->index_type = 'self';
+
+			echo $this->template;
+
+		} # End of if	
+
+		# Festival index with friend selected
+		if($user_id && (!($user_id == $current_user_id))) {
+
+			$q_friend = '
+				select 
+					a.*,
+					b.rsvp_id,
+					b.user_id,
+					b.status				
+				from festivals a
+				inner join rsvp b
+					on (
+					a.festival_id = b.festival_id
+					and b.user_id = '.$user_id.'
+					)
+			';
+
+			$festival_list = DB::instance(DB_NAME)->select_rows($q_friend);
+
+			$this->template->content->festival_list = $festival_list;
+
+			$q_title = 'select first_name, last_name from users where user_id = '.$user_id;
+
+			$title = DB::instance(DB_NAME)->select_row($q_title);
+
+			$this->template->content->user_info = $title;
+
+			$this->template->title = $title['first_name'].' '.$title['last_name'];
+
+			$this->template->content->index_type = 'friend';
+
+			echo $this->template;
+
+		} # End of if
+
+	} # End of method
 
 	# Need to implement error checking if no fest_id entered
 	public function event($fest_id = NULL) {
@@ -43,7 +135,7 @@ class festivals_controller extends base_controller {
 
 		echo $this->template;
 
-	}
+	} # End of method
 
 	# Need to implement form validation (check for required fields)
 	public function post() {
@@ -53,7 +145,8 @@ class festivals_controller extends base_controller {
 		$this->template->title = 'Post New Festival';
 
 		echo $this->template;
-	}
+
+	} # End of method
 
 	public function p_post() {
 
@@ -69,7 +162,18 @@ class festivals_controller extends base_controller {
 			Router::redirect('/festivals/post');
 		}
 
-	}
+	} # End of method
+
+	public function rsvp() {
+
+		# Check if $_POST has required values
+		if($_POST['user_id'] && $_POST['festival_id']) {
+
+
+
+		}
+
+	} # End of method
 
 	# Need to:
 		# create new table that stores user-specific festival plans
@@ -79,6 +183,6 @@ class festivals_controller extends base_controller {
 		$this->template->content = View::instance('v_festivals_plan');
 		$this->template->title = 'Title';
 
-	}
+	} # End of method
 
 }

@@ -17,8 +17,8 @@
 
 		<?php if($user): ?>
 			<li><a href='/festivals/index'>EZFest</a></li>
-			<li><a href=''>Friends</a></li>
-			<li><a href=''>My Festivals</a></li>
+			<li><a href='/friends/index'>Friends</a></li>
+			<li><a href='/festivals/index/<?=$user->user_id?>'>My Festivals</a></li>
 			<li><a href='/reg/logout'>Log Out</a></li>
 		<?php else: ?>
 			<li><a href='/'>EZFest</a></li>

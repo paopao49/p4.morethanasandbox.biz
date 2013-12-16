@@ -15,14 +15,15 @@ class friends_controller extends base_controller {
 
 	public function index() {
 
-		$this->template->content = View::instance('v_festivals_index');
-		$this->template->title = 'Festival List';
+		$this->template->content = View::instance('v_friends_index');
 
-		$q = 'select * from festivals';
+		$this->template->title = 'Friends';
 
-		$festival_list = DB::instance(DB_NAME)->select_rows($q);
+		$q = 'select first_name, last_name, user_id from users where user_id != '.$this->user->user_id;
 
-		$this->template->content->festival_list = $festival_list;
+		$friends_list = DB::instance(DB_NAME)->select_rows($q);
+
+		$this->template->content->friends_list = $friends_list;
 
 		echo $this->template;
 

@@ -2,7 +2,16 @@
 
 class index_controller extends base_controller {
 		
-	# Need to check if user is logged in - if so, redirect to festivals/index
+	public function __construct() {
+
+		parent::__construct();
+
+		if($this->user) {
+			Router::redirect('/festivals/index/');
+		}
+
+	}
+
 	public function index($error = NULL) {	
 		
 		$this->template->content = View::instance('v_index_index');
