@@ -33,22 +33,22 @@
 		<!-- WISH LIST FLAG -->
 		<p>
 			<?php if($fest['status'] == 'wishlist'): ?>
-				<img alt='<?=$fest['festival_id']?>' class='wishlisted' src='/images/thumbs_up_green.gif' title='Select to remove from wishlist' height='30' width='30'>
+				<img alt='<?=$fest['festival_id']?>' class='w_wishlisted' src='/images/thumbs_up_green.gif' title='Select to remove from wishlist' height='30' width='30'>
 			<?php elseif($fest['status'] == 'confirmed'): ?>
-				<img alt='<?=$fest['festival_id']?>' class='not_wishlisted' src='/images/thumbs_up_white.gif' title='Select to add to wishlist' height='30' width='30'>
+				<img alt='<?=$fest['festival_id']?>' class='w_confirmed' src='/images/thumbs_up_white.gif' title='Select to add to wishlist' height='30' width='30'>
 			<?php else: ?>
-				<img alt='<?=$fest['festival_id']?>' class='not_wishlisted' src='/images/thumbs_up_white.gif' title='Select to add to wishlist' height='30' width='30'>
+				<img alt='<?=$fest['festival_id']?>' class='w_no_rsvp' src='/images/thumbs_up_white.gif' title='Select to add to wishlist' height='30' width='30'>
 			<?php endif; ?>
 		</p>
 
 		<!-- CONFIRMED FLAG -->
 		<p>
 			<?php if($fest['status'] == 'wishlist'): ?>
-				<img alt='<?=$fest['festival_id']?>' class='not_confirmed' src='/images/thumbs_up_white.gif' title='Select if you are confirmed for this festival' height='30' width='30'>
+				<img alt='<?=$fest['festival_id']?>' class='c_wishlisted' src='/images/thumbs_up_white.gif' title='Select if you are confirmed for this festival' height='30' width='30'>
 			<?php elseif($fest['status'] == 'confirmed'): ?>
-				<img alt='<?=$fest['festival_id']?>' class='confirmed' src='/images/thumbs_up_green.gif' title='Select to remove confirmation for this festival' height='30' width='30'>
+				<img alt='<?=$fest['festival_id']?>' class='c_confirmed' src='/images/thumbs_up_green.gif' title='Select to remove confirmation for this festival' height='30' width='30'>
 			<?php else: ?>
-				<img alt='<?=$fest['festival_id']?>' class='not_confirmed' src='/images/thumbs_up_white.gif' title='Select if you are confirmed for this festival' height='30' width='30'>
+				<img alt='<?=$fest['festival_id']?>' class='c_no_rsvp' src='/images/thumbs_up_white.gif' title='Select if you are confirmed for this festival' height='30' width='30'>
 			<?php endif; ?>
 		</p>
 

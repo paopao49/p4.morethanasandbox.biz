@@ -167,11 +167,25 @@ class festivals_controller extends base_controller {
 	public function rsvp() {
 
 		# Check if $_POST has required values
-		if($_POST['user_id'] && $_POST['festival_id']) {
+		#if($_POST['user_id'] && $_POST['festival_id']) {
 
+		$_POST['user_id'] = $this->user->user_id;
 
+		if($_POST['status'] == NULL) {
 
-		}
+			$where_for_delete = 'WHERE festival_id = '.$_POST['festival_id'].' AND user_id = '.$this->user->user_id;
+
+			DB::instance(DB_NAME)->delete('rsvp', $where_for_delete);
+
+		} elseif($_POST['status'] == 'wishlist' || $_POST['status'] == 'confirmed') {
+
+			$where_for_delete = 'WHERE festival_id = '.$_POST['festival_id'].' AND user_id = '.$this->user->user_id;
+
+			DB::instance(DB_NAME)->delete('rsvp', $where_for_delete);			
+		
+			DB::instance(DB_NAME)->insert('rsvp',$_POST);
+
+		} # End of if
 
 	} # End of method
 
