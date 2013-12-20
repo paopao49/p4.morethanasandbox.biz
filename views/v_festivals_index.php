@@ -1,3 +1,4 @@
+<!-- need to build sorting -->
 <?php if($index_type == 'home'): ?>
 
 	<h2>All Festivals</h2>
@@ -51,6 +52,10 @@
 				<img alt='<?=$fest['festival_id']?>' class='c_no_rsvp' src='/images/thumbs_up_white.gif' title='Select if you are confirmed for this festival' height='30' width='30'>
 			<?php endif; ?>
 		</p>
+
+		<?php if($index_type == 'self'): ?>
+			<a href='/festivals/plan/<?=$fest['festival_id']?>'>Plan</a>
+		<?php endif; ?>
 
 	<?php endif; ?>
 

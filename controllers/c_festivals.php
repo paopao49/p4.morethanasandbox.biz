@@ -17,7 +17,7 @@ class festivals_controller extends base_controller {
 
         $client_files_body = Array(
             'https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
-            '/js/js_festivals_index.js'
+            '/js/js_festivals_click_listener.js'
         );
 
         $this->template->client_files_body = Utils::load_client_files($client_files_body); 	
@@ -125,7 +125,23 @@ class festivals_controller extends base_controller {
 
 		$this->template->content = View::instance('v_festivals_event');
 
-		$q = 'select * from festivals where festival_id = '.$fest_id;
+		$current_user_id = $this->user->user_id;
+
+		$q = '
+			select 
+				a.*,
+				b.rsvp_id,
+				b.user_id,
+				b.status
+			from festivals a
+			left join rsvp b
+				on (
+				a.festival_id = b.festival_id
+				and b.user_id = '.$current_user_id.'
+				)
+			where
+				a.festival_id = '.$fest_id
+		;
 
 		$current_festival = DB::instance(DB_NAME)->select_row($q);
 
@@ -133,16 +149,62 @@ class festivals_controller extends base_controller {
 
 		$this->template->content->current_festival = $current_festival;
 
+        $client_files_body = Array(
+            'https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
+            '/js/js_festivals_click_listener.js'
+        );
+
+        $this->template->client_files_body = Utils::load_client_files($client_files_body); 		
+
 		echo $this->template;
 
 	} # End of method
 
-	# Need to implement form validation (check for required fields)
-	public function post() {
+	# Need to implement form validation (check for the 3 required fields)
+	# If passed a festival_id, functions as an "Edit Festival" instead
+	public function post($festival_id = NULL) {
+
+        $client_files_head = Array(
+            '/css/v_festivals_post.css'
+        );
+
+        $this->template->client_files_head = Utils::load_client_files($client_files_head); 	
+
+        $client_files_body = Array(
+        	'https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
+            '/js/js_festivals_post.js'
+        );
+
+        $this->template->client_files_body = Utils::load_client_files($client_files_body); 	        		
 
 		$this->template->content = View::instance('v_festivals_post');
 
-		$this->template->title = 'Post New Festival';
+		$page_title = 'Post New Festival';
+
+		if($festival_id) {
+
+			$q = '
+				select 
+					*				
+				from festivals
+				where
+					festival_id = '.$festival_id
+			;
+
+			$festival = DB::instance(DB_NAME)->select_row($q);
+
+			$this->template->content->festival = $festival;
+
+			# If passed argument returns a valid festival, change header
+			if($festival) {
+
+				$page_title = 'Edit Festival Details';
+
+			}
+
+		}
+
+		$this->template->title = $page_title;	
 
 		echo $this->template;
 
@@ -150,17 +212,43 @@ class festivals_controller extends base_controller {
 
 	public function p_post() {
 
-		# Check for required fields
-		if($_POST['title'] && $_POST['start_date'] && $_POST['end_date'] && $_POST['location']) {
+		# Check if user is trying to edit an existing festival or post a new festival
+		if($_POST['festival_id']) {
 
-			DB::instance(DB_NAME)->insert('festivals',$_POST);
+			$q = '
+				select 
+					*				
+				from festivals
+				where
+					festival_id = '.$_POST['festival_id']
+			;
+
+			$id_in_database = DB::instance(DB_NAME)->select_field($q);
+
+			$where_for_delete = 'WHERE festival_id = '.$_POST['festival_id'];
+
+			DB::instance(DB_NAME)->delete('festivals', $where_for_delete);			
+		
+			DB::instance(DB_NAME)->insert('festivals',$_POST);	
 
 			Router::redirect('/festivals/index');
 
+		# Else is when user is trying to post a new festival
 		} else {
 
-			Router::redirect('/festivals/post');
-		}
+			# Check for required fields
+			if($_POST['title'] && $_POST['start_date'] && $_POST['end_date'] && $_POST['location']) {
+
+				DB::instance(DB_NAME)->insert('festivals',$_POST);
+
+				Router::redirect('/festivals/index');
+
+			} else {
+
+				Router::redirect('/festivals/post');
+			}
+
+		} # End of else
 
 	} # End of method
 
@@ -179,23 +267,83 @@ class festivals_controller extends base_controller {
 
 		} elseif($_POST['status'] == 'wishlist' || $_POST['status'] == 'confirmed') {
 
+			# Delete previous rsvp if it exists
 			$where_for_delete = 'WHERE festival_id = '.$_POST['festival_id'].' AND user_id = '.$this->user->user_id;
 
 			DB::instance(DB_NAME)->delete('rsvp', $where_for_delete);			
 		
+			# Insert new rsvp
 			DB::instance(DB_NAME)->insert('rsvp',$_POST);
 
 		} # End of if
 
 	} # End of method
 
-	# Need to:
-		# create new table that stores user-specific festival plans
-		# update function to display user-specific festival plans AND filter to only festival identified by $fest_id
+	# Need to reroute if given NULL $fest_id
+	# Need to place call-to-action when event plan is NULL
 	public function plan($fest_id = NULL) {
 
 		$this->template->content = View::instance('v_festivals_plan');
-		$this->template->title = 'Title';
+
+        $client_files_head = Array(
+            '/css/v_festivals_plan.css'
+        );
+
+        $this->template->client_files_head = Utils::load_client_files($client_files_head); 			
+
+        $client_files_body = Array(
+            'https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
+            '/js/js_festivals_plan.js'
+        );
+
+        $this->template->client_files_body = Utils::load_client_files($client_files_body); 			
+
+		$q_fest = '
+			select 
+				*				
+			from festivals
+			where
+				festival_id = '.$fest_id
+		;
+
+		$current_festival = DB::instance(DB_NAME)->select_row($q_fest);
+
+		$this->template->content->current_festival = $current_festival;
+
+		$current_user_id = $this->user->user_id;
+
+		$q_plan = '
+			select 
+				*				
+			from plans
+			where
+				festival_id = '.$fest_id.'
+				and user_id = '.$current_user_id
+		;
+
+		$current_plan = DB::instance(DB_NAME)->select_row($q_plan);
+
+		$this->template->content->current_plan = $current_plan;
+
+		$this->template->title = $current_festival['title'];
+
+		echo $this->template;
+
+	} # End of method
+
+	public function p_plan() {
+
+		$_POST['user_id'] = $this->user->user_id;
+
+		# Delete previous plan if it exists
+		$where_for_delete = 'WHERE festival_id = '.$_POST['festival_id'].' AND user_id = '.$this->user->user_id;
+
+		DB::instance(DB_NAME)->delete('plans', $where_for_delete);			
+	
+		# Insert new plan
+		DB::instance(DB_NAME)->insert('plans',$_POST);
+
+		echo 'Save successful!';
 
 	} # End of method
 
