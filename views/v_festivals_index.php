@@ -25,9 +25,7 @@
 
 	<p><?=$fest['location']?></p>
 
-	<p><?=$fest['start_date']?></p>
-
-	<p><?=$fest['end_date']?></p>
+	<p><?=$fest['start_date']?> to <?=$fest['end_date']?></p>
 
 	<?php if($index_type == 'home' or $index_type == 'self'): ?>
 

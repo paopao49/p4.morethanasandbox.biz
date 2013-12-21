@@ -47,9 +47,9 @@
 
 		*Title <input size='.strlen($title).' type="text" name="title" value="'.$title.'"><br>
 
-		*Start Date <input size='.strlen($start_date).' type="date" name="start_date" value="'.$start_date.'"><br>
+		*Start Date <input id="start_date" size='.strlen($start_date).' type="text" name="start_date" value="'.$start_date.'"><br>
 
-		*End Date <input size='.strlen($end_date).' type="date" name="end_date" value="'.$end_date.'"><br>
+		*End Date <input id="end_date" size='.strlen($end_date).' type="text" name="end_date" value="'.$end_date.'"><br>
 
 		*Location <input size='.strlen($location).' type="text" name="location" value="'.$location.'"><br>
 

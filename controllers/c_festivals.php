@@ -165,13 +165,15 @@ class festivals_controller extends base_controller {
 	public function post($festival_id = NULL) {
 
         $client_files_head = Array(
-            '/css/v_festivals_post.css'
+            '/css/v_festivals_post.css',
+            'http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css'
         );
 
         $this->template->client_files_head = Utils::load_client_files($client_files_head); 	
 
         $client_files_body = Array(
         	'https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
+        	'https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js',
             '/js/js_festivals_post.js'
         );
 
@@ -212,6 +214,8 @@ class festivals_controller extends base_controller {
 
 	public function p_post() {
 
+		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+
 		# Check if user is trying to edit an existing festival or post a new festival
 		if($_POST['festival_id']) {
 
@@ -223,13 +227,9 @@ class festivals_controller extends base_controller {
 					festival_id = '.$_POST['festival_id']
 			;
 
-			$id_in_database = DB::instance(DB_NAME)->select_field($q);
+			$where_condition = 'WHERE festival_id = '.$_POST['festival_id'];
 
-			$where_for_delete = 'WHERE festival_id = '.$_POST['festival_id'];
-
-			DB::instance(DB_NAME)->delete('festivals', $where_for_delete);			
-		
-			DB::instance(DB_NAME)->insert('festivals',$_POST);	
+			DB::instance(DB_NAME)->update('festivals',$_POST,$where_condition);
 
 			Router::redirect('/festivals/index');
 
@@ -256,6 +256,8 @@ class festivals_controller extends base_controller {
 
 		# Check if $_POST has required values
 		#if($_POST['user_id'] && $_POST['festival_id']) {
+
+		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
 		$_POST['user_id'] = $this->user->user_id;
 
@@ -332,6 +334,8 @@ class festivals_controller extends base_controller {
 	} # End of method
 
 	public function p_plan() {
+
+		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
 		$_POST['user_id'] = $this->user->user_id;
 

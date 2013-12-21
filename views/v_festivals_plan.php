@@ -1,6 +1,5 @@
 <h2><?=$current_festival['title']?></h2>
-<p><?=$current_festival['start_date']?></p>
-<p><?=$current_festival['end_date']?></p>
+<p><?=$current_festival['start_date']?> to <?=$current_festival['end_date']?></p>
 <p><?=$current_festival['location']?></p>
 <p><?=$current_festival['link']?></p>
 <p id='passed_id'><?=$current_festival['festival_id']?></p>
