@@ -21,11 +21,11 @@ h2 {
 	border: none;	
 }
 
-input {
-	margin: 0px 0px 5px 5px;
-}
-
 #submit_button:hover {
 	background-color: #FFF056;
 	color: #191919;
+}
+
+input {
+	margin: 0px 0px 5px 5px;
 }

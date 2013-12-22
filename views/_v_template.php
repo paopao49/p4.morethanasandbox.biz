@@ -12,6 +12,9 @@
 
 	<!-- Controller Specific JS/CSS -->
 	<?php if(isset($client_files_head)) echo $client_files_head; ?>
+
+	<!-- Favicon -->
+	<link rel="icon" href="/images/favicon.gif" type="image/gif" sizes="16x16"> 
 	
 </head>
 
