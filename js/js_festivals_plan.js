@@ -57,7 +57,7 @@ $('#save_icon').click(function(){
 			other_3_notes: $('#field_d6_form').val(),
 
 		}, // End of data
-		
+
 	}); // End of .ajax
 
 }); // End of click listener

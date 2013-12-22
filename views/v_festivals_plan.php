@@ -1,16 +1,32 @@
 <h2><?=$current_festival['title']?></h2>
-<p><?=$current_festival['start_date']?> to <?=$current_festival['end_date']?></p>
-<p><?=$current_festival['location']?></p>
-<p><?=$current_festival['link']?></p>
+
+<div id='festival_detail_wrapper'>
+
+	<p class='festival_details'><?=$current_festival['location']?></p>
+
+	<p class='spacer'>|</p>
+
+	<p class='festival_details'><?=$current_festival['start_date']?> to <?=$current_festival['end_date']?></p>
+
+	<p class='spacer'>|</p>
+
+	<p class='festival_details'><?=$current_festival['link']?></p>
+
+</div>
+
+<!-- Festival ID passed for AJAX call and not displayed -->
 <p id='passed_id'><?=$current_festival['festival_id']?></p>
 
-<p>
+<p id='instructions'>
     Click a field to edit.<br>
     Click "Save" when you are ready to party.
 </p>
 
+<!-- Display message upon successful save -->
+<p id='message_holder'></p>
+<div><img id='loading_icon' src='/images/loading.gif' alt='Loading...'></div>
 
-<table cellspacing='0'>
+<table>
 	<thead>
 		<tr>
 			<th>Category</th>			
@@ -18,7 +34,7 @@
 			<th>Cost</th>
 			<th>Notes</th>
 		</tr>
-	<thead>
+	</thead>
 	<tbody>
 		<tr>
 			<td>
@@ -123,11 +139,9 @@
 			</td>
 		</tr>	
 	</tbody>
-</table>								
+</table>							
 
 <!-- Need FORM VALIDATION TO MAKE SURE USER IS ENTERING VALID COSTS -->
 <p>Total Cost</p>
 
 <p id='save_icon'>Save</p>
-<p id='message_holder'></p>
-<div><img id='loading_icon' src='/images/loading.gif'></div>

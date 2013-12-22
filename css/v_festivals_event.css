@@ -1,0 +1,59 @@
+#empty_div {
+	clear:both;
+}
+
+#subheader_wrapper {
+	margin-bottom: 25px;
+}
+
+#plan_button_wrapper {
+	width: 33%;
+	display: inline-block;
+	float: right;
+	text-align: center;
+	padding-top: 25px;
+}
+
+#festival_wrapper {
+	background-color: #DFE2DB;
+	padding: 10px 0px;
+	margin-top: 20px;
+}
+
+#festival_title {
+	color: #191919;
+	margin: 20px 0px;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+#plan_button, #edit_button {
+	text-decoration: none;
+	background-color: #191919;
+	color: #FFFFFF;
+	padding: 5px;
+	margin: 45px 10px 0px 10px;
+	font-size: 20px;
+}
+
+#plan_button:hover, #edit_button:hover {
+	background-color: #FFF056;
+	color: #191919;
+}
+
+.flags  {
+	width: 32%;
+	float: right;
+	display: inline;
+	font-weight: bold;
+	margin: 0px;
+}
+
+.flags img {
+	padding-top: 15px;
+}
+
+.field_title {
+	font-weight: bold;
+	font-size: 20px;
+}

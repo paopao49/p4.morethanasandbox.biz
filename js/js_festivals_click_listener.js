@@ -7,8 +7,8 @@ $("[class^='w_']").click(function(){
 	// Determine value of user in RSVP table
 	var icon_type = $(this).attr('class');
 
-	var c_selector = "[class^='c_'][alt='"+fest_id+"']";
 	var w_selector = "[class^='w_'][alt='"+fest_id+"']";
+	var c_selector = "[class^='c_'][alt='"+fest_id+"']";
 
 	if(icon_type == 'w_wishlisted') {
 
@@ -19,7 +19,7 @@ $("[class^='w_']").click(function(){
 				$(w_selector).attr('src','/images/loading.gif');
 			},
 			success: function(response){
-				$(w_selector).attr('src','/images/thumbs_up_white.gif');				
+				$(w_selector).attr('src','/images/heart_white.gif');				
 				$(c_selector).attr('src','/images/thumbs_up_white.gif');
 
 				$(w_selector).attr('class','w_no_rsvp');
@@ -40,7 +40,7 @@ $("[class^='w_']").click(function(){
 				$(w_selector).attr('src','/images/loading.gif');
 			},
 			success: function(response){
-				$(w_selector).attr('src','/images/thumbs_up_green.gif');				
+				$(w_selector).attr('src','/images/heart_yellow.gif');				
 				$(c_selector).attr('src','/images/thumbs_up_white.gif');
 
 				$(w_selector).attr('class','w_wishlisted');
@@ -65,8 +65,8 @@ $("[class^='c_']").click(function(){
 	// Determine value of user in RSVP table
 	var icon_type = $(this).attr('class');
 
-	var c_selector = "[class^='c_'][alt='"+fest_id+"']";
 	var w_selector = "[class^='w_'][alt='"+fest_id+"']";
+	var c_selector = "[class^='c_'][alt='"+fest_id+"']";
 
 	if(icon_type == 'c_confirmed') {
 
@@ -77,7 +77,7 @@ $("[class^='c_']").click(function(){
 				$(c_selector).attr('src','/images/loading.gif');
 			},
 			success: function(response){
-				$(w_selector).attr('src','/images/thumbs_up_white.gif');				
+				$(w_selector).attr('src','/images/heart_white.gif');				
 				$(c_selector).attr('src','/images/thumbs_up_white.gif');
 
 				$(w_selector).attr('class','w_no_rsvp');
@@ -98,8 +98,8 @@ $("[class^='c_']").click(function(){
 				$(c_selector).attr('src','/images/loading.gif');
 			},
 			success: function(response){
-				$(w_selector).attr('src','/images/thumbs_up_white.gif');				
-				$(c_selector).attr('src','/images/thumbs_up_green.gif');
+				$(w_selector).attr('src','/images/heart_white.gif');				
+				$(c_selector).attr('src','/images/thumbs_up_yellow.gif');
 
 				$(w_selector).attr('class','w_confirmed');
 				$(c_selector).attr('class','c_confirmed');								

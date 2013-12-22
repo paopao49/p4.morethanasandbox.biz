@@ -1,0 +1,23 @@
+#error_message {
+	color: red;
+}
+
+h2 {
+	font-size: 30px;
+}
+
+.reg_buttons {
+	display: inline-block;
+	margin: 30px 20px;
+}
+
+.reg_buttons a {
+	text-decoration: none;
+	color: #191919;
+	padding: 10px 20px;
+	background-color: #DFE2DB;
+}
+
+.reg_buttons a:hover {
+	background-color: #FFF056;
+}

@@ -1,0 +1,73 @@
+.empty_div {
+	clear: both;
+}
+
+h2 {
+	font-size: 30px;
+}
+
+.festival_wrapper {
+	margin-bottom: 5px;
+	background-color: #DFE2DB;
+	padding: 1px 0px 5px 10px;
+}
+
+.festival_title {
+	text-decoration: none;
+	background-color: #191919;
+	color: #FFFFFF;
+	padding: 5px;
+	margin: 0px;
+	float: left;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.festival_title:hover, .plan_button:hover, #post_button:hover {
+	background-color: #FFF056;
+	color: #191919;
+}
+
+.festival_location {
+	font-weight: bold;
+	float: left;
+	clear: left;
+	margin-bottom: 10px;
+}
+
+.festival_dates {
+	float: left;
+	clear: left;
+	margin: 0px;
+	font-style: italic;
+}
+
+.flags  {
+	float: right;
+	display: inline;
+	font-weight: bold;
+	margin: 15px 10px 0px 20px;
+}
+
+.flags img {
+	padding-top: 15px;
+}
+
+#post_button {
+	text-decoration: none;
+	background-color: #191919;
+	color: #FFFFFF;
+	font-size: 18px;
+	padding: 8px;
+	font-weight: bold;	
+}
+
+.plan_button {
+	text-decoration: none;
+	background-color: #191919;
+	color: #FFFFFF;
+	padding: 5px;
+	margin: 45px 10px 0px 10px;
+	font-size: 20px;	
+	float: right;
+}

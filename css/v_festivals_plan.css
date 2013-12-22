@@ -1,3 +1,25 @@
+h2 {
+	font-size: 30px;
+}
+
+.festival_details {
+	float: left;
+	width: 30%;
+	margin: 0px;
+	font-weight: bold;
+}
+
+.spacer {
+	float: left;
+	margin: 0px 5px;
+	font-weight: bold;
+}
+
+#instructions {
+	margin: 70px 0px 30px 0px;
+	clear: both;
+}
+
 .field_form, #message_holder, #loading_icon, #passed_id {
 	display: none;
 }
@@ -22,6 +44,7 @@ table a:hover {
 	text-decoration:underline;
 }
 table {
+	border-spacing: 0px;
 	font-family:Arial, Helvetica, sans-serif;
 	color:#666;
 	font-size:12px;

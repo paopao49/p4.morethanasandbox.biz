@@ -10,7 +10,13 @@ class reg_controller extends base_controller {
 
             $this->template->content = View::instance('v_reg_join');
             $this->template->title = "Join EZFest";
-            $this->template->content->error = $error;            
+            $this->template->content->error = $error;  
+
+            $client_files_head = Array(
+                "/css/v_login_or_join.css"
+            );
+
+            $this->template->client_files_head = Utils::load_client_files($client_files_head);                        
      
             echo $this->template;
 
@@ -23,12 +29,12 @@ class reg_controller extends base_controller {
 
     public function p_join() {
 
+        $_POST = DB::instance(DB_NAME)->sanitize($_POST);
+
     	# Redirect to join form if $_POST is incomplete
     	if(!($_POST['first_name'] && $_POST['last_name'] && $_POST['email'] && $_POST['password'])) {
     		Router::redirect('/reg/join/');
-    	}
-
-    	$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+    	}    	
 
         $q_email = "
             SELECT email
@@ -76,11 +82,17 @@ class reg_controller extends base_controller {
         # Redirect users already logged in to home page
         if(!$this->user) {
 
-        $this->template->content = View::instance('v_reg_login');
-        $this->template->title = 'Log in to EZFest';
-        $this->template->content->error = $error;        
+            $this->template->content = View::instance('v_reg_login');
+            $this->template->title = 'Log in to EZFest';
+            $this->template->content->error = $error;        
 
-        echo $this->template;
+            $client_files_head = Array(
+                "/css/v_login_or_join.css"
+            );
+
+            $this->template->client_files_head = Utils::load_client_files($client_files_head);          
+
+            echo $this->template;
 
         } else {
 
@@ -92,14 +104,14 @@ class reg_controller extends base_controller {
     
     public function p_login() {
 
+        $_POST = DB::instance(DB_NAME)->sanitize($_POST);
+
         # Redirect to login if $_POST is null
         if(!($_POST['email'] && $_POST['password'])) {
 
         	Router::redirect('/reg/login');
 
-        }
-
-        $_POST = DB::instance(DB_NAME)->sanitize($_POST);
+        }        
 
         $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
 

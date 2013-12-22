@@ -1,0 +1,38 @@
+.empty_div {
+	clear: both;
+}
+
+h2 {
+	font-size: 30px;
+}
+
+.festival_wrapper {
+	margin-bottom: 5px;
+	background-color: #DFE2DB;
+	padding: 1px 0px 5px 10px;
+}
+
+.festival_title {
+	text-decoration: none;
+	background-color: #191919;
+	color: #FFFFFF;
+	padding: 5px;
+	margin: 0px;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.festival_title:hover {
+	background-color: #FFF056;
+	color: #191919;
+}
+
+.festival_location {
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.festival_dates {	
+	margin: 0px;
+	font-style: italic;
+}

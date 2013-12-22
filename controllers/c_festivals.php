@@ -13,7 +13,7 @@ class festivals_controller extends base_controller {
 
 	} # End of method
 
-	public function index($user_id = NULL) {
+	public function index($user_id = NULL) {			
 
         $client_files_body = Array(
             'https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
@@ -28,6 +28,13 @@ class festivals_controller extends base_controller {
 		# Festival index with no user_id selected (aka the home page)
 		if(!$user_id) {
 
+			# Different CSS based on method argument
+	        $client_files_head = Array(
+	            '/css/v_festivals_index.css'
+	        );
+
+	        $this->template->client_files_head = Utils::load_client_files($client_files_head); 			
+
 			$q_home = '
 				select 
 					a.*,
@@ -40,6 +47,7 @@ class festivals_controller extends base_controller {
 					a.festival_id = b.festival_id
 					and b.user_id = '.$current_user_id.'
 					)
+				order by a.title
 			';
 
 			$festival_list = DB::instance(DB_NAME)->select_rows($q_home);
@@ -57,6 +65,13 @@ class festivals_controller extends base_controller {
 		# Festival index with self selected
 		if($user_id == $current_user_id) {
 
+			# Different CSS based on method argument
+	        $client_files_head = Array(
+	            '/css/v_festivals_index.css'
+	        );
+
+	        $this->template->client_files_head = Utils::load_client_files($client_files_head); 			
+
 			$q_self = '
 				select 
 					a.*,
@@ -69,6 +84,7 @@ class festivals_controller extends base_controller {
 					a.festival_id = b.festival_id
 					and b.user_id = '.$current_user_id.'
 					)
+				order by a.title
 			';
 
 			$festival_list = DB::instance(DB_NAME)->select_rows($q_self);
@@ -86,6 +102,13 @@ class festivals_controller extends base_controller {
 		# Festival index with friend selected
 		if($user_id && (!($user_id == $current_user_id))) {
 
+			# Different CSS based on method argument
+	        $client_files_head = Array(
+	            '/css/v_festivals_index_friend.css'
+	        );
+
+	        $this->template->client_files_head = Utils::load_client_files($client_files_head);			
+
 			$q_friend = '
 				select 
 					a.*,
@@ -98,6 +121,7 @@ class festivals_controller extends base_controller {
 					a.festival_id = b.festival_id
 					and b.user_id = '.$user_id.'
 					)
+				order by a.title
 			';
 
 			$festival_list = DB::instance(DB_NAME)->select_rows($q_friend);
@@ -124,6 +148,12 @@ class festivals_controller extends base_controller {
 	public function event($fest_id = NULL) {
 
 		$this->template->content = View::instance('v_festivals_event');
+
+        $client_files_head = Array(
+            '/css/v_festivals_event.css'
+        );
+
+        $this->template->client_files_head = Utils::load_client_files($client_files_head);			
 
 		$current_user_id = $this->user->user_id;
 
