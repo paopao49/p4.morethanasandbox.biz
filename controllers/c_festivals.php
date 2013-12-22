@@ -213,6 +213,7 @@ class festivals_controller extends base_controller {
 
 		$page_title = 'Post New Festival';
 
+		# Check if passed argument returns a pre-existing festival and load pre-existing festival details for edit
 		if($festival_id) {
 
 			$q = '
@@ -225,10 +226,10 @@ class festivals_controller extends base_controller {
 
 			$festival = DB::instance(DB_NAME)->select_row($q);
 
-			$this->template->content->festival = $festival;
-
-			# If passed argument returns a valid festival, change header
+			# If passed argument returns a pre-existing festival, load festival change header
 			if($festival) {
+
+				$this->template->content->festival = $festival;
 
 				$page_title = 'Edit Festival Details';
 
@@ -247,15 +248,8 @@ class festivals_controller extends base_controller {
 		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
 		# Check if user is trying to edit an existing festival or post a new festival
-		if($_POST['festival_id']) {
-
-			$q = '
-				select 
-					*				
-				from festivals
-				where
-					festival_id = '.$_POST['festival_id']
-			;
+		# $_POST['festival_id'] is only set when the post method loads a pre-existing festival
+		if(!($_POST['festival_id'] == '')) {
 
 			$where_condition = 'WHERE festival_id = '.$_POST['festival_id'];
 
@@ -263,10 +257,10 @@ class festivals_controller extends base_controller {
 
 			Router::redirect('/festivals/index');
 
-		# Else is when user is trying to post a new festival
+		# Else case is when user is trying to post a new festival
 		} else {
 
-			# Check for required fields
+			# Check for required fields (redo this with JS)
 			if($_POST['title'] && $_POST['start_date'] && $_POST['end_date'] && $_POST['location']) {
 
 				DB::instance(DB_NAME)->insert('festivals',$_POST);

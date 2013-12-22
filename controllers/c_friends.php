@@ -15,6 +15,12 @@ class friends_controller extends base_controller {
 
 	public function index() {
 
+        $client_files_head = Array(
+            '/css/v_friends_index.css'
+        );
+
+        $this->template->client_files_head = Utils::load_client_files($client_files_head); 				
+
 		$this->template->content = View::instance('v_friends_index');
 
 		$this->template->title = 'Friends';

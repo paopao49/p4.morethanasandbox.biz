@@ -6,20 +6,28 @@
 
 <?php
 
-	$title = null;
-	$start_date = null;
-	$end_date = null;
-	$location = null;
-	$genre = null;
-	$link = null;
-	$cost = null;
-	$description = null;
+	$title = '';
+	$start_date = '';
+	$end_date = '';
+	$location = '';
+	$genre = '';
+	$link = '';
+	$cost = '';
+	$description = '';
 	$submit_button = 'Post Festival';
-	$festival_id = null;
-	$message = '
-		Post a new festival!<br>
-		Fields marked by * are mandatory.<br>'
-	;
+	$festival_id = '""';
+
+	$title_size = '20';
+	$start_date_size = '20';
+	$end_date_size = '20';
+	$location_size = '20';
+	$genre_size = '20';
+	$link_size = '20';
+	$cost_size = '20';
+	$description_size = '20';
+
+	$header = 'Post a new festival!';
+	$instructions = 'Fields marked by * are mandatory.';	
 
 	if(isset($festival)) {
 
@@ -33,39 +41,53 @@
 		$description = $festival['description'];
 		$submit_button = 'Save Edits';
 		$festival_id = $festival['festival_id'];
-		$message = '
-			Edit festival details.<br>
-			Fields marked by * are mandatory.<br>'
-		;		
+
+		$title_size = strlen($title);
+		$start_date_size = strlen($start_date);
+		$end_date_size = strlen($end_date);
+		$location_size = strlen($location);
+		$genre_size = strlen($genre);
+		$link_size = strlen($link);
+		$cost_size = strlen($cost);
+		$description_size = strlen($description);		
+
+		$header = 'Edit festival details.';
 
 	}
 
 	echo '
-		<form method="POST" action="/festivals/p_post">'.$message.'
 
-		<input id="id_holder" name="festival_id" value='.$festival_id.'>
+		<h2>'.$header.'</h2>
 
-		*Title <input size='.strlen($title).' type="text" name="title" value="'.$title.'"><br>
+		<p id="instructions">'.$instructions.'</p>
 
-		*Start Date <input id="start_date" size='.strlen($start_date).' type="text" name="start_date" value="'.$start_date.'"><br>
+		<p id="message_holder">Changes made. Redirecting to home page...</p>	
 
-		*End Date <input id="end_date" size='.strlen($end_date).' type="text" name="end_date" value="'.$end_date.'"><br>
+		<form method="POST" action="/festivals/p_post">
 
-		*Location <input size='.strlen($location).' type="text" name="location" value="'.$location.'"><br>
+			<input id="id_holder" name="festival_id" value='.$festival_id.'>
 
-		Genre <input size='.strlen($genre).' type="text" name="genre" value="'.$genre.'"><br>
+			*Title <input size='.$title_size.' type="text" name="title" value="'.$title.'"><br>
 
-		Link <input size='.strlen($link).' type="text" name="link" value="'.$link.'"><br>
+			*Start Date <input id="start_date" size='.$start_date_size.' type="text" name="start_date" value="'.$start_date.'"><br>
 
-		Cost <input size='.strlen($cost).' type="text" name="cost" value="'.$cost.'"><br>
+			*End Date <input id="end_date" size='.$end_date_size.' type="text" name="end_date" value="'.$end_date.'"><br>
 
-		Description <input size='.strlen($description).' type="text" name="description" value="'.$description.'"><br>
+			*Location <input size='.$location_size.' type="text" name="location" value="'.$location.'"><br>
 
-		<input id="submit_button" type="submit" value="'.$submit_button.'">
-	</form>
+			Genre <input size='.$genre_size.' type="text" name="genre" value="'.$genre.'"><br>
 
-	<br>
-	<p id="message_holder">Changes made. Redirecting to home page...</p>
+			Link <input size='.$link_size.' type="text" name="link" value="'.$link.'"><br>
+
+			Cost <input size='.$cost_size.' type="text" name="cost" value="'.$cost.'"><br>
+
+			Description <input size='.$description_size.' type="text" name="description" value="'.$description.'"><br>
+
+			<input id="submit_button" type="submit" value="'.$submit_button.'">
+
+		</form>
+
+		<br>	
 	';
 
 ?>

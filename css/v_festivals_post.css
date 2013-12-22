@@ -1,7 +1,31 @@
-#id_holder {
+#id_holder, #message_holder {
 	display: none;
 }
 
-#message_holder {
-	display:none;
+h2 {
+	font-size: 30px;
+}
+
+#instructions {
+	margin-bottom: 30px;
+	font-style: italic;
+}
+
+#submit_button {
+	margin-top: 20px;
+	background-color: #191919;
+	color: #FFFFFF;
+	padding: 5px;
+	font-family: Georgia, Arial, sans-serif;
+	font-size: 16px;
+	border: none;	
+}
+
+input {
+	margin: 0px 0px 5px 5px;
+}
+
+#submit_button:hover {
+	background-color: #FFF056;
+	color: #191919;
 }
