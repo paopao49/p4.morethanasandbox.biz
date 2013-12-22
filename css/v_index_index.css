@@ -9,6 +9,7 @@ h2 {
 .reg_buttons {
 	display: inline-block;
 	margin: 30px 20px;
+	font-weight: bold;
 }
 
 .reg_buttons a {

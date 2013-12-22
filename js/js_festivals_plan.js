@@ -1,3 +1,24 @@
+// For formmating only - borrowed online
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+// Calculate total festival cost when document loads
+$(document).ready(function(){
+
+	var costs = 0;
+
+	$('.cost_field').each(function(){
+
+		var current_cost = $(this).html();
+
+		costs += parseInt(current_cost);
+
+	});
+
+	$('#cost_holder').html(numberWithCommas(costs));
+});
+
 $('.field_cell').click(function(){
 	var clicked_id = $(this).attr('id');
 
@@ -21,10 +42,9 @@ $('#save_icon').click(function(){
 			$('#message_holder').html(response);
 			$('#message_holder')
 				.css('display','inline')
-				.delay(1500)
-				.queue(function(next){
-					$(this).css('display','none')					
-					next();
+				.delay(1000)
+				.queue(function(){
+					location.reload();
 				}
 			);
 		},

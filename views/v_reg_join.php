@@ -6,7 +6,7 @@
 
 <form method='POST' action='/reg/p_join'>
 	<p>Join EZFest!</p>
-	<p>*All fields are mandatory.</p>
+	<p id='instructions'>*All fields are mandatory.</p>
 
 	First Name <input type='text' name='first_name'><br>
 	Last Name <input type='text' name='last_name'><br>

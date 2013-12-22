@@ -1,6 +1,6 @@
 <h2 id='festival_title'><?=$current_festival['title']?></h2>
 
-<a id='edit_button' href='/festivals/post/<?=$current_festival['festival_id']?>'>Edit</a>
+<a id='edit_button' href='/festivals/post/<?=$current_festival['festival_id']?>'>Edit festival details</a>
 
 <!-- Festival wrapper for formatting -->
 <div id='festival_wrapper'>

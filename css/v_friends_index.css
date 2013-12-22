@@ -4,6 +4,8 @@ h2 {
 
 #description {
 	margin-bottom: 30px;
+	line-height: 150%;
+	font-style: italic;
 }
 
 p a {
@@ -11,8 +13,7 @@ p a {
 	background-color: #191919;
 	color: #FFFFFF;
 	padding: 5px;
-	display: inline-block;
-	width: 100%;
+	display: block;
 	font-size: 25px;
 	font-weight: bold;
 }

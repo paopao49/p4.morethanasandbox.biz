@@ -26,6 +26,11 @@
 <p id='message_holder'></p>
 <div><img id='loading_icon' src='/images/loading.gif' alt='Loading...'></div>
 
+<!-- Need FORM VALIDATION TO MAKE SURE USER IS ENTERING VALID COSTS -->
+<p id='total_cost'>
+	Total Cost: $<span id='cost_holder'></span>
+</p>
+
 <table>
 	<thead>
 		<tr>
@@ -45,7 +50,7 @@
 				<input id='field_b1_form' class='field_form' type='text' value='<?=$current_plan['transportation_name']?>'>
 			</td>
 			<td id='field_c1' class='field_cell'>
-				<span id='field_c1_display'><?=$current_plan['transportation_cost']?></span>
+				<span class='cost_field' id='field_c1_display'><?=$current_plan['transportation_cost']?></span>
 				<input id='field_c1_form' class='field_form' type='text' value='<?=$current_plan['transportation_cost']?>'>
 			</td>
 			<td id='field_d1' class='field_cell'>
@@ -62,7 +67,7 @@
                 <input id='field_b2_form' class='field_form' type='text' value='<?=$current_plan['accomodation_name']?>'>				
 			</td>
 			<td id='field_c2' class='field_cell'>
-				<span id='field_c2_display'><?=$current_plan['accomodation_cost']?></span>
+				<span class='cost_field' id='field_c2_display'><?=$current_plan['accomodation_cost']?></span>
                 <input id='field_c2_form' class='field_form' type='text' value='<?=$current_plan['accomodation_cost']?>'>								
 			</td>
 			<td id='field_d2' class='field_cell'>
@@ -79,7 +84,7 @@
 				<input id='field_b3_form' class='field_form' type='text' value='<?=$current_plan['tickets_name']?>'>
 			</td>
 			<td id='field_c3' class='field_cell'>
-				<span id='field_c3_display'><?=$current_plan['tickets_cost']?></span>
+				<span class='cost_field' id='field_c3_display'><?=$current_plan['tickets_cost']?></span>
 				<input id='field_c3_form' class='field_form' type='text' value='<?=$current_plan['tickets_cost']?>'>
 			</td>
 			<td id='field_d3' class='field_cell'>
@@ -96,7 +101,7 @@
 				<input id='field_b4_form' class='field_form' type='text' value='<?=$current_plan['other_1_name']?>'>
 			</td>
 			<td id='field_c4' class='field_cell'>
-				<span id='field_c4_display'><?=$current_plan['other_1_cost']?></span>
+				<span class='cost_field' id='field_c4_display'><?=$current_plan['other_1_cost']?></span>
 				<input id='field_c4_form' class='field_form' type='text' value='<?=$current_plan['other_1_cost']?>'>
 			</td>
 			<td id='field_d4' class='field_cell'>
@@ -113,7 +118,7 @@
 				<input id='field_b5_form' class='field_form' type='text' value='<?=$current_plan['other_2_name']?>'>
 			</td>
 			<td id='field_c5' class='field_cell'>
-				<span id='field_c5_display'><?=$current_plan['other_2_cost']?></span>
+				<span class='cost_field' id='field_c5_display'><?=$current_plan['other_2_cost']?></span>
 				<input id='field_c5_form' class='field_form' type='text' value='<?=$current_plan['other_2_cost']?>'>
 			</td>
 			<td id='field_d5' class='field_cell'>
@@ -130,7 +135,7 @@
 				<input id='field_b6_form' class='field_form' type='text' value='<?=$current_plan['other_3_name']?>'>
 			</td>
 			<td id='field_c6' class='field_cell'>
-				<span id='field_c6_display'><?=$current_plan['other_3_cost']?></span>
+				<span class='cost_field' id='field_c6_display'><?=$current_plan['other_3_cost']?></span>
 				<input id='field_c6_form' class='field_form' type='text' value='<?=$current_plan['other_3_cost']?>'>
 			</td>
 			<td id='field_d6' class='field_cell'>
@@ -140,8 +145,5 @@
 		</tr>	
 	</tbody>
 </table>							
-
-<!-- Need FORM VALIDATION TO MAKE SURE USER IS ENTERING VALID COSTS -->
-<p>Total Cost</p>
 
 <p id='save_icon'>Save</p>
