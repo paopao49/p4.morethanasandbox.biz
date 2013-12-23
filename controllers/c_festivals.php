@@ -204,6 +204,7 @@ class festivals_controller extends base_controller {
         $client_files_body = Array(
         	'https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
         	'https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js',
+        	'/js/jquery.form.js',
             '/js/js_festivals_post.js'
         );
 

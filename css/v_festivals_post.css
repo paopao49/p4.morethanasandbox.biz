@@ -1,9 +1,22 @@
-#id_holder, #message_holder {
+#id_holder {
 	display: none;
+}
+
+#message_holder {
+	display: none;
+	font-weight: bold;
+	font-size: 16px;
+	background-color: #FFF056;
+	color: #191919;
+	padding: 10px;
 }
 
 h2 {
 	font-size: 30px;
+}
+
+form {
+	margin-top: 30px;
 }
 
 #instructions {

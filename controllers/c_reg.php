@@ -16,7 +16,15 @@ class reg_controller extends base_controller {
                 "/css/v_login_or_join.css"
             );
 
-            $this->template->client_files_head = Utils::load_client_files($client_files_head);                        
+            $this->template->client_files_head = Utils::load_client_files($client_files_head);    
+
+            $client_files_body = Array(
+                "https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js",
+                "/js/jquery.form.js",
+                "/js/js_reg_join.js"
+            );
+
+            $this->template->client_files_body = Utils::load_client_files($client_files_body);                                   
      
             echo $this->template;
 
@@ -29,12 +37,7 @@ class reg_controller extends base_controller {
 
     public function p_join() {
 
-        $_POST = DB::instance(DB_NAME)->sanitize($_POST);
-
-    	# Redirect to join form if $_POST is incomplete
-    	if(!($_POST['first_name'] && $_POST['last_name'] && $_POST['email'] && $_POST['password'])) {
-    		Router::redirect('/reg/join/');
-    	}    	
+        $_POST = DB::instance(DB_NAME)->sanitize($_POST);  	
 
         $q_email = "
             SELECT email
@@ -47,8 +50,17 @@ class reg_controller extends base_controller {
 
         # Check if email is already in registered in database
         if($existing_email) {
+
         	Router::redirect('/reg/join/duplicate_email');
+
         }
+
+        # Redirect to join form if $_POST is incomplete
+        if(!($_POST['first_name'] && $_POST['last_name'] && $_POST['email'] && $_POST['password'])) {
+
+            Router::redirect('/reg/join/');
+
+        }          
 
 	    $_POST['created'] = Time::now();
 

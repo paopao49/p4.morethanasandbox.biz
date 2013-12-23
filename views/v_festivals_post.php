@@ -61,9 +61,9 @@
 
 		<p id="instructions">'.$instructions.'</p>
 
-		<p id="message_holder">Changes made. Redirecting to home page...</p>	
+		<p id="message_holder">Changes successful! Redirecting to home page...</p>	
 
-		<form method="POST" action="/festivals/p_post">
+		<form>
 
 			<input id="id_holder" name="festival_id" value='.$festival_id.'>
 

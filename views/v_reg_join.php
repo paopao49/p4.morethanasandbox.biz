@@ -4,7 +4,9 @@
 
 <?php endif; ?>
 
-<form method='POST' action='/reg/p_join'>
+<p id='message_holder'></p>
+
+<form>
 	<p>Join EZFest!</p>
 	<p id='instructions'>*All fields are mandatory.</p>
 
