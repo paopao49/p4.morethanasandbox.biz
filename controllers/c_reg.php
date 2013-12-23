@@ -1,16 +1,13 @@
 <?php
 
 class reg_controller extends base_controller {
-	
-	# Need to implement form validation
-	# Mkae sure to test if user is entering valid email address
-    public function join($error = NULL) {
+
+    public function join() {
 
         if(!$this->user) {
 
             $this->template->content = View::instance('v_reg_join');
             $this->template->title = "Join EZFest";
-            $this->template->content->error = $error;  
 
             $client_files_head = Array(
                 "/css/v_login_or_join.css"
@@ -39,6 +36,7 @@ class reg_controller extends base_controller {
 
         $_POST = DB::instance(DB_NAME)->sanitize($_POST);  	
 
+        # Set up test case for existing email
         $q_email = "
             SELECT email
             FROM users
@@ -51,39 +49,42 @@ class reg_controller extends base_controller {
         # Check if email is already in registered in database
         if($existing_email) {
 
-        	Router::redirect('/reg/join/duplicate_email');
+            echo 'Email is already registered.';
 
-        }
+        } elseif(!($_POST['first_name'] && $_POST['last_name'] && $_POST['email'] && $_POST['password'])) {
 
-        # Redirect to join form if $_POST is incomplete
-        if(!($_POST['first_name'] && $_POST['last_name'] && $_POST['email'] && $_POST['password'])) {
+            echo 'All fields are mandatory.';
 
-            Router::redirect('/reg/join/');
+        } elseif(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
 
-        }          
+            echo 'Must enter a valid email address';
 
-	    $_POST['created'] = Time::now();
+        } else {    
 
-	    $_POST['modified'] = Time::now();
+    	    $_POST['created'] = Time::now();
 
-	    $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
+    	    $_POST['modified'] = Time::now();
 
-	    $_POST['token'] = sha1(TOKEN_SALT.$_POST['email'].Utils::generate_random_string());
+    	    $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
 
-	    $user_id = DB::instance(DB_NAME)->insert('users',$_POST);
+    	    $_POST['token'] = sha1(TOKEN_SALT.$_POST['email'].Utils::generate_random_string());
 
-	    $q_token = "
-	        SELECT token
-	        FROM users
-	        WHERE
-	            user_id = ".$user_id
-	    ;
+    	    $user_id = DB::instance(DB_NAME)->insert('users',$_POST);
 
-	    $token = DB::instance(DB_NAME)->select_field($q_token);
+    	    $q_token = "
+    	        SELECT token
+    	        FROM users
+    	        WHERE
+    	            user_id = ".$user_id
+    	    ;
 
-	    setcookie("token",$token,strtotime('+1 year'),'/');
+    	    $token = DB::instance(DB_NAME)->select_field($q_token);
 
-	    Router::redirect('/festivals/index/');
+    	    setcookie("token",$token,strtotime('+1 year'),'/');
+
+            echo 'Registration successful!';
+    	    //Router::redirect('/festivals/index/');
+        }  
 
     } # End of method
 

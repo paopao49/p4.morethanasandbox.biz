@@ -1,9 +1,3 @@
-<?php if($error): ?>
-
-	<p id='error_message'>Email is already registered.</p>
-
-<?php endif; ?>
-
 <p id='message_holder'></p>
 
 <form>
