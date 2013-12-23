@@ -14,8 +14,12 @@ h2 {
 	font-weight: bold;
 }
 
+#empty_div {
+	clear:both;
+}
+
 #instructions {
-	margin: 70px 0px 30px 0px;
+	margin: 30px 0px 30px 0px;
 	clear: both;
 	line-height: 150%;
 	font-style: italic;

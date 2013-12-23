@@ -10,7 +10,13 @@
 
 	<p class='spacer'>|</p>
 
-	<p class='festival_details'><?=$current_festival['link']?></p>
+	<?php if(!$current_festival['link']): ?>
+		<span>No link provided.</span>
+	<?php else: ?>
+		<p class='festival_details'><a href="<?=$current_festival['link']?>"><?=$current_festival['link']?><a></p>
+	<?php endif; ?>
+
+	<div id='empty_div'></div>
 
 </div>
 
