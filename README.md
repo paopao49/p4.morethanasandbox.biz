@@ -21,4 +21,4 @@ Features:
 	7. Add festivals to your own wishlist of confirm attendance (AJAX implementation)
 	8. Plan itinerary for each festival
 
-JavaScript is utilized for AJAX implementations, as well as form validation.
+JavaScript is utilized for AJAX implementations, click listeners, as well as form validation.
