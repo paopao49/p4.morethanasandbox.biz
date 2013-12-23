@@ -91,7 +91,7 @@
 	</p>
 
 	<p>
-		<span class='field_title'>Desciption<br></span>
+		<span class='field_title'>Description<br></span>
 		<?php if(!$current_festival['description']): ?>
 			<span>No description entered.</span>
 		<?php else: ?>
