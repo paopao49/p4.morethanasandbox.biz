@@ -14,23 +14,30 @@
 
 </div>
 
-<!-- Festival ID passed for AJAX call and not displayed -->
+<!-- Festival ID passed for AJAX purposes and not displayed -->
 <p id='passed_id'><?=$current_festival['festival_id']?></p>
 
+
+<!-- Display instructions for user -->
 <p id='instructions'>
     Click a field to edit.<br>
     Click "Save" when you are ready to party.
 </p>
 
-<!-- Display message upon successful save -->
+<!-- Display message upon save attempt -->
 <p id='message_holder'></p>
+
+<!-- Display loading icon if there is client/server delay -->
 <div><img id='loading_icon' src='/images/loading.gif' alt='Loading...'></div>
 
-<!-- Need FORM VALIDATION TO MAKE SURE USER IS ENTERING VALID COSTS -->
+<!-- Displays total festival cost -->
 <p id='total_cost'>
 	Total Cost: $<span id='cost_holder'></span>
 </p>
 
+<!--
+	Festival plan table. Written out in order to get unique IDs, which enable inline editing through JavaScript
+-->
 <table>
 	<thead>
 		<tr>

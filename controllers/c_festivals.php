@@ -248,30 +248,27 @@ class festivals_controller extends base_controller {
 
 		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
+		# Check for required fields
+		if(!($_POST['title'] && $_POST['start_date'] && $_POST['end_date'] && $_POST['location'])) {
+
+			echo 'Please fill in all required fields.';
+
 		# Check if user is trying to edit an existing festival or post a new festival
 		# $_POST['festival_id'] is only set when the post method loads a pre-existing festival
-		if(!($_POST['festival_id'] == '')) {
+		} elseif(!($_POST['festival_id'] == '')) {
 
 			$where_condition = 'WHERE festival_id = '.$_POST['festival_id'];
 
 			DB::instance(DB_NAME)->update('festivals',$_POST,$where_condition);
 
-			Router::redirect('/festivals/index');
+			echo 'Changes successful! Redirecting to home page...';
 
 		# Else case is when user is trying to post a new festival
 		} else {
 
-			# Check for required fields (redo this with JS)
-			if($_POST['title'] && $_POST['start_date'] && $_POST['end_date'] && $_POST['location']) {
+			DB::instance(DB_NAME)->insert('festivals',$_POST);
 
-				DB::instance(DB_NAME)->insert('festivals',$_POST);
-
-				Router::redirect('/festivals/index');
-
-			} else {
-
-				Router::redirect('/festivals/post');
-			}
+			echo 'Successful post! Redirecting to home page...';
 
 		} # End of else
 
@@ -358,9 +355,9 @@ class festivals_controller extends base_controller {
 
 	} # End of method
 
-	public function p_plan() {
+	public function p_plan($error = NULL) {
 
-		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+		$_POST = DB::instance(DB_NAME)->sanitize($_POST);		
 
 		$_POST['user_id'] = $this->user->user_id;
 
@@ -376,4 +373,4 @@ class festivals_controller extends base_controller {
 
 	} # End of method
 
-}
+} # End of controller

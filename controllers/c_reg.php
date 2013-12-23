@@ -57,7 +57,7 @@ class reg_controller extends base_controller {
 
         } elseif(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
 
-            echo 'Must enter a valid email address';
+            echo 'Must enter a valid email address.';
 
         } else {    
 
@@ -83,7 +83,7 @@ class reg_controller extends base_controller {
     	    setcookie("token",$token,strtotime('+1 year'),'/');
 
             echo 'Registration successful!';
-    	    //Router::redirect('/festivals/index/');
+
         }  
 
     } # End of method
@@ -96,14 +96,21 @@ class reg_controller extends base_controller {
         if(!$this->user) {
 
             $this->template->content = View::instance('v_reg_login');
-            $this->template->title = 'Log in to EZFest';
-            $this->template->content->error = $error;        
+            $this->template->title = 'Log in to EZFest';     
 
             $client_files_head = Array(
                 "/css/v_login_or_join.css"
             );
 
-            $this->template->client_files_head = Utils::load_client_files($client_files_head);          
+            $this->template->client_files_head = Utils::load_client_files($client_files_head);         
+
+            $client_files_body = Array(
+                "https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js",
+                "/js/jquery.form.js",
+                "/js/js_reg_login.js"
+            );
+
+            $this->template->client_files_body = Utils::load_client_files($client_files_body);               
 
             echo $this->template;
 
@@ -119,16 +126,8 @@ class reg_controller extends base_controller {
 
         $_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
-        # Redirect to login if $_POST is null
-        if(!($_POST['email'] && $_POST['password'])) {
-
-        	Router::redirect('/reg/login');
-
-        }        
-
         $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
 
-        # Only get token if password matches
         $q_token = "
             SELECT token
             FROM users
@@ -144,28 +143,34 @@ class reg_controller extends base_controller {
                 email = '".$_POST['email']."'
         ";
 
-        # Get token given user credentials
+        # Get token if entered email and password match DB
         $token = DB::instance(DB_NAME)->select_field($q_token);
 
-        # Get email given user credentials
-        $em = DB::instance(DB_NAME)->select_field($q_email);
+        # Get email if entered email matches DB
+        $em = DB::instance(DB_NAME)->select_field($q_email);        
 
-        # No email error redirect
-        if(!$em) {
+        # Check if all fields have been entered
+        if(!($_POST['email'] && $_POST['password'])) {
 
-            Router::redirect('/reg/login/no_email');
+            echo 'Enter your credentials.';
 
-        # Wrong password redirect
+        # Check if email has been registered
+        } elseif(!$em) {
+
+            echo 'Email has not been registered yet.';
+
+        # Check if password is correct
         } elseif(!$token) {
 
-            Router::redirect('/reg/login/no_token');
+            echo 'Incorrect password.';
 
         # Successful login
         } else {
 
             setcookie("token",$token,strtotime('+1 year'),'/');
 
-            Router::redirect('/festivals/index');
+            echo 'Login successful!';            
+
         }
 
     } # End of method

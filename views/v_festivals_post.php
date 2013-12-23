@@ -61,7 +61,7 @@
 
 		<p id="instructions">'.$instructions.'</p>
 
-		<p id="message_holder">Changes successful! Redirecting to home page...</p>	
+		<p id="message_holder"></p>	
 
 		<form>
 

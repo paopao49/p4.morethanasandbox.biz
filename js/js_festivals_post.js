@@ -1,15 +1,20 @@
-// Need to implement form validator to check for all 4 required fields
+// check for valid dates
+// check for all mandatory fields filled in
 
 // Setting up options for AJAX form
 var options = { 
     type: 'post',
     url: '/festivals/p_post',
     success: function(response) {
+    	$('#message_holder').html(response);
 		$('#message_holder')
 			.css('display','inline')
 			.delay(1000)
-			.queue(function(){
-				window.location.replace('/festivals/index');
+			.queue(function(next){
+		    	if((response == 'Successful post! Redirecting to home page...') || (response == 'Changes successful! Redirecting to home page...')) {
+						window.location.replace('/festivals/index');
+				};
+				next();
 			}
 		);    	         
     } 
