@@ -5,6 +5,10 @@
 	See what others are interested in attending!
 </p>
 
+<?php if(!$friends_list): ?>
+	<p>More EZFest users are coming soon!</p>
+<?php endif; ?>
+
 <?php foreach($friends_list as $friend): ?>
 
 	<p>

@@ -90,7 +90,7 @@ class reg_controller extends base_controller {
 
 
     # Need to implement form validation
-    public function login($error = NULL) {
+    public function login() {
 
         # Redirect users already logged in to home page
         if(!$this->user) {

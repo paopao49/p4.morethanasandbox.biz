@@ -15,8 +15,8 @@ class index_controller extends base_controller {
 	public function index($error = NULL) {			
 		
 		$this->template->content = View::instance('v_index_index');
-		$this->template->title = "EZFest";
-		$this->template->content->error = $error;		
+		$this->template->title = "EZFest";		
+		$this->template->content->error = $error;
 
 	    $client_files_head = Array(
 	        "/css/v_index_index.css"

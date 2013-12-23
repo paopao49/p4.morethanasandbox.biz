@@ -22,6 +22,10 @@
 <?php endif; ?>
 <!-- End of subheader -->
 
+<?php if(!$festival_list): ?>
+	<p>Either you haven't signed up for any festivals or there aren't any festivals posted yet!<p>
+<?php endif; ?>
+
 <!-- Festival List -->
 <?php foreach($festival_list as $fest): ?>
 

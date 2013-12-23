@@ -65,22 +65,38 @@
 
 	<p>
 		<span class='field_title'>Genre<br></span>
-		<?=$current_festival['genre']?>
+		<?php if(!$current_festival['genre']): ?>
+			<span>No genre entered.</span>
+		<?php else: ?>
+			<?=$current_festival['genre']?>
+		<?php endif; ?>
 	</p>
 
 	<p>
 		<span class='field_title'>Link<br></span>
-		<a href=<?=$current_festival['link']?>> <?=$current_festival['link']?> </a>
+		<?php if(!$current_festival['link']): ?>
+			<span>No link entered.</span>
+		<?php else: ?>
+			<a href=<?=$current_festival['link']?>> <?=$current_festival['link']?> </a>
+		<?php endif; ?>				
 	</p>
 
 	<p>
 		<span class='field_title'>Cost<br></span>
-		<?=$current_festival['cost']?>
+		<?php if((!$current_festival['cost']) || ($current_festival['cost'] == 0)): ?>
+			<span>No cost entered.</span>
+		<?php else: ?>
+			<?=$current_festival['cost']?>
+		<?php endif; ?>			
 	</p>
 
 	<p>
 		<span class='field_title'>Desciption<br></span>
-		<?=$current_festival['description']?>
+		<?php if(!$current_festival['description']): ?>
+			<span>No description entered.</span>
+		<?php else: ?>
+			<?=$current_festival['description']?>
+		<?php endif; ?>		
 	</p>
 
 <!-- End of festival wrapper -->

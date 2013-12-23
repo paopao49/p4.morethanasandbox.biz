@@ -144,8 +144,13 @@ class festivals_controller extends base_controller {
 
 	} # End of method
 
-	# Need to implement error checking if no fest_id entered
 	public function event($fest_id = NULL) {
+
+		if($fest_id == NULL) {
+
+			Router::redirect('/festivals/index');
+
+		}				
 
 		$this->template->content = View::instance('v_festivals_event');
 
@@ -175,6 +180,12 @@ class festivals_controller extends base_controller {
 
 		$current_festival = DB::instance(DB_NAME)->select_row($q);
 
+		if(!$current_festival) {
+
+			Router::redirect('/festivals/index');
+
+		}		
+
 		$this->template->title = $current_festival['title'];
 
 		$this->template->content->current_festival = $current_festival;
@@ -190,7 +201,6 @@ class festivals_controller extends base_controller {
 
 	} # End of method
 
-	# Need to implement form validation (check for the 3 required fields)
 	# If passed a festival_id, functions as an "Edit Festival" instead
 	public function post($festival_id = NULL) {
 
@@ -303,9 +313,13 @@ class festivals_controller extends base_controller {
 
 	} # End of method
 
-	# Need to reroute if given NULL $fest_id
-	# Need to place call-to-action when event plan is NULL
 	public function plan($fest_id = NULL) {
+
+		if(!$fest_id) {
+
+			Router::redirect('/festivals/index');
+
+		}			
 
 		$this->template->content = View::instance('v_festivals_plan');
 
@@ -331,6 +345,12 @@ class festivals_controller extends base_controller {
 		;
 
 		$current_festival = DB::instance(DB_NAME)->select_row($q_fest);
+
+		if(!$current_festival) {
+
+			Router::redirect('/festivals/index');
+
+		}			
 
 		$this->template->content->current_festival = $current_festival;
 
